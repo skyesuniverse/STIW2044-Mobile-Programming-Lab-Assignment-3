@@ -273,7 +273,7 @@ class _LoginScreenState extends State<LoginScreen> {
       setState(() {
         _emailEditingController.text = email;
         _passEditingController.text = password;
-        _isChecked = (prefs.getBool('checkbox')) ?? false;/////////////////////////
+        _isChecked = (prefs.getBool('checkbox')) ?? false;
       });
     }
   }

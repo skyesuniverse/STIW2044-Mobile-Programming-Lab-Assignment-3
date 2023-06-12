@@ -22,7 +22,6 @@ class NewItemScreen extends StatefulWidget {
 class _NewItemScreenState extends State<NewItemScreen> {
   late double screenHeight, screenWidth, cardwitdh;
   File? _image;
-
   var pathAsset = "assets/images/camera.png";
   final _formKey = GlobalKey<FormState>();
 
@@ -50,15 +49,10 @@ class _NewItemScreenState extends State<NewItemScreen> {
   ];
 
   late Position _currentPosition;
-
   String curaddress = "";
   String curstate = "";
   String prlat = "";
   String prlong = "";
-
-  // List<File?> imageList = [
-  //   null, null, null
-  // ];
 
   List<File?> selectedImages = [null, null, null];
 
@@ -88,102 +82,45 @@ class _NewItemScreenState extends State<NewItemScreen> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
               child: Card(
-                  child: ListView(
-                children: [
-                  CarouselSlider(
-                    items: [
-                      for (var i = 0; i < selectedImages.length; i++)
-                        GestureDetector(
-                          onTap: () {
-                            selectFromGallery(i);
-                          },
-                          child: Card(
-                            child: Container(
-                              width: screenWidth,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: selectedImages[i] == null
-                                      ? AssetImage(pathAsset)
-                                      : FileImage(selectedImages[i]!)
-                                          as ImageProvider,
-                                  fit: BoxFit.cover,
+                child: ListView(
+                  children: [
+                    CarouselSlider(
+                      items: [
+                        for (var i = 0; i < selectedImages.length; i++)
+                          GestureDetector(
+                            onTap: () {
+                              selectFromGallery(i);
+                            },
+                            child: Card(
+                              child: Container(
+                                width: screenWidth,
+                                decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: selectedImages[i] == null
+                                        ? AssetImage(pathAsset)
+                                        : FileImage(selectedImages[i]!)
+                                            as ImageProvider,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        )
-                      // Container(
-                      //   margin: EdgeInsets.all(6.0),
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(8.0),
-                      //     image: DecorationImage(
-                      //       image: _image == null
-                      //           ? AssetImage(pathAsset)
-                      //           : FileImage(selectedImages[i]!)
-                      //               as ImageProvider,
-                      //       fit: BoxFit.cover,
-                      //     ),
-                      //   ),
-                      //   child: GestureDetector(onTap: () {
-                      //     selectFromGallery(i);
-                      //   }),
-                      // ),
-
-                      // //2nd Image of Slider
-                      // Container(
-                      //   margin: EdgeInsets.all(6.0),
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(8.0),
-                      //     image: DecorationImage(
-                      //       image: _image2 == null
-                      //           ? AssetImage(pathAsset)
-                      //           : FileImage(_image2!) as ImageProvider,
-                      //       fit: BoxFit.cover,
-                      //     ),
-                      //   ),
-                      // ),
-
-                      // //3rd Image of Slider
-                      // Container(
-                      //   margin: EdgeInsets.all(6.0),
-                      //   decoration: BoxDecoration(
-                      //     borderRadius: BorderRadius.circular(8.0),
-                      //     image: DecorationImage(
-                      //       image: _image3 == null
-                      //           ? AssetImage(pathAsset)
-                      //           : FileImage(_image3!) as ImageProvider,
-                      //       fit: BoxFit.cover,
-                      //     ),
-                      //   ),
-                      // ),
-                    ],
-                    options: CarouselOptions(
-                      height: 180.0,
-                      enlargeCenterPage: true,
-                      autoPlay: true,
-                      aspectRatio: 16 / 9,
-                      autoPlayCurve: Curves.fastOutSlowIn,
-                      enableInfiniteScroll: false,
-                      autoPlayAnimationDuration: Duration(milliseconds: 800),
-                      viewportFraction: 0.8,
-                    ),
-                  )
-                ],
-              )
-                  // SizedBox(
-                  //   child: Container(
-                  //     width: screenWidth,
-                  //     decoration: BoxDecoration(
-                  //       image: DecorationImage(
-                  //         image: _image == null
-                  //             ? AssetImage(pathAsset)
-                  //             : FileImage(_image!) as ImageProvider,
-                  //         fit: BoxFit.contain,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
-                  ),
+                          )
+                      ],
+                      options: CarouselOptions(
+                        height: 180.0,
+                        enlargeCenterPage: true,
+                        autoPlay: true,
+                        aspectRatio: 16 / 9,
+                        autoPlayCurve: Curves.fastOutSlowIn,
+                        enableInfiniteScroll: false,
+                        autoPlayAnimationDuration: Duration(milliseconds: 800),
+                        viewportFraction: 0.8,
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
           ),
           Expanded(
@@ -196,31 +133,8 @@ class _NewItemScreenState extends State<NewItemScreen> {
                   child: Column(
                     children: [
                       Row(
-                        children: [
-                          //const Icon(Icons.category_rounded),
-                          const SizedBox(width: 16),
-                          // SizedBox(
-                          //   height: 60,
-                          //   child: DropdownButton(
-                          //     //sorting dropdownoption
-                          //     // Not necessary for Option 1
-                          //     value: selectedCategory,
-                          //     onChanged: (newValue) {
-                          //       setState(() {
-                          //         selectedCategory = newValue!;
-                          //         print(selectedCategory);
-                          //       });
-                          //     },
-                          //     items: categorylist.map((selectedType) {
-                          //       return DropdownMenuItem(
-                          //         value: selectedType,
-                          //         child: Text(
-                          //           selectedType,
-                          //         ),
-                          //       );
-                          //     }).toList(),
-                          //   ),
-                          // ),
+                        children: const [
+                          SizedBox(width: 16),
                         ],
                       ),
                       DropdownButtonFormField(
@@ -243,8 +157,6 @@ class _NewItemScreenState extends State<NewItemScreen> {
                           );
                         }).toList(),
                       ),
-
-                      ////////
                       const SizedBox(width: 9),
                       TextFormField(
                         textInputAction: TextInputAction.next,
@@ -257,7 +169,6 @@ class _NewItemScreenState extends State<NewItemScreen> {
                         decoration: const InputDecoration(
                           labelText: 'Item Name',
                           labelStyle: TextStyle(),
-                          //icon: Icon(Icons.abc),
                           icon: Icon(Icons.type_specimen),
                           focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(width: 2.0),
@@ -381,9 +292,6 @@ class _NewItemScreenState extends State<NewItemScreen> {
                             },
                             child: const Text("Add Item")),
                       )
-                      // Flexible(
-                      //   child: child,
-                      // ),
                     ],
                   ),
                 ),
@@ -527,93 +435,6 @@ class _NewItemScreenState extends State<NewItemScreen> {
     });
   }
 
-  // void _selectImage(int index, File? image) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       // return object of type Dialog
-  //       return AlertDialog(
-  //           title: const Text(
-  //             "Select from",
-  //             style: TextStyle(),
-  //           ),
-  //           content: Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //             children: [
-  //               ElevatedButton(
-  //                 style: ElevatedButton.styleFrom(
-  //                     fixedSize: Size(screenWidth / 4, screenHeight / 6)),
-  //                 child: const Text('Gallery'),
-  //                 onPressed: () => {
-  //                   Navigator.of(context).pop(),
-  //                   _selectfromGallery(index, image),
-  //                 },
-  //               ),
-  //               ElevatedButton(
-  //                 style: ElevatedButton.styleFrom(
-  //                     fixedSize: Size(screenWidth / 4, screenHeight / 6)),
-  //                 child: const Text('Camera',
-  //                     style: TextStyle(
-  //                       fontSize: 13.5,
-  //                     )),
-  //                 onPressed: () => {
-  //                   Navigator.of(context).pop(),
-  //                   _selectFromCamera(),
-  //                 },
-  //               ),
-  //             ],
-  //           ));
-  //     },
-  //   );
-  // }
-
-  // List<File?> imageList = [ _image1, _image2, _image3 ];
-  //  Future<void> _selectfromGallery(int index, File? image) async {
-  //   final picker = ImagePicker();
-  //   final pickedFile = await picker.pickImage(
-  //     source: ImageSource.gallery,
-  //     maxHeight: 800,
-  //     maxWidth: 800,
-  //   );
-  //   if (pickedFile != null) {
-  //     imageList[index] = File(pickedFile.path);
-  //     cropImage(image);
-  //   } else {
-  //     print('No image selected.');
-  //   }
-  // }
-
-  Future<void> _selectfromGallery1() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(
-      source: ImageSource.gallery,
-      maxHeight: 800,
-      maxWidth: 800,
-    );
-    if (pickedFile != null) {
-      _image = File(pickedFile.path);
-      //_cropImage();
-    } else {
-      print('No image selected.');
-    }
-  }
-
-  Future<void> _selectFromCamera() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(
-      source: ImageSource.camera,
-      maxHeight: 800,
-      maxWidth: 800,
-    );
-    if (pickedFile != null) {
-      //_image = File(pickedFile.path);
-
-      //cropImage();
-    } else {
-      print('No image selected.');
-    }
-  }
-
   void _determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
@@ -662,23 +483,6 @@ class _NewItemScreenState extends State<NewItemScreen> {
       prlong = _currentPosition.longitude.toString();
     }
     setState(() {});
-  }
-
-  void onAlert() {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Select only 3 photo')));
-  }
-
-  List<String> convertImagesToBase64(List<File> images) {
-    List<String> base64Strings = [];
-
-    for (var image in images) {
-      List<int> imageBytes = image.readAsBytesSync();
-      String base64Image = base64Encode(imageBytes);
-      base64Strings.add(base64Image);
-    }
-
-    return base64Strings;
   }
 
   Future<void> selectFromGallery(int i) async {

@@ -26,7 +26,6 @@ class _MainScreenState extends State<MainScreen> {
       HomeTabScreen(user: widget.user),
       SellerTabScreen(user: widget.user),
       ProfileTabScreen(user: widget.user),
-      
     ];
   }
 
@@ -49,12 +48,12 @@ class _MainScreenState extends State<MainScreen> {
                   icon: Icon(
                     Icons.home_rounded,
                   ),
-                  label: "Home/buyer"),
+                  label: "Home"),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.sell,
                   ),
-                  label: "Seller"),
+                  label: "Items"),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person,

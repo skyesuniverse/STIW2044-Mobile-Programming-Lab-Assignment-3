@@ -17,7 +17,7 @@ class SellerTabScreen extends StatefulWidget {
 }
 
 class _SellerTabScreenState extends State<SellerTabScreen> {
-  String maintitle = 'Seller';
+  String maintitle = 'Items';
   late double screenHeight, screenWidth;
   late int axiscount = 2;
   List<Item> itemList = <Item>[];
