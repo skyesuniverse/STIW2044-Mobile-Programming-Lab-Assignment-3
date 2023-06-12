@@ -7,16 +7,16 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class SellerTabScreen extends StatefulWidget {
+class OwnerTabScreen extends StatefulWidget {
   final User user;
 
-  const SellerTabScreen({super.key, required this.user});
+  const OwnerTabScreen({super.key, required this.user});
 
   @override
-  State<SellerTabScreen> createState() => _SellerTabScreenState();
+  State<OwnerTabScreen> createState() => _OwnerTabScreenState();
 }
 
-class _SellerTabScreenState extends State<SellerTabScreen> {
+class _OwnerTabScreenState extends State<OwnerTabScreen> {
   String maintitle = 'Items';
   late double screenHeight, screenWidth;
   late int axiscount = 2;
