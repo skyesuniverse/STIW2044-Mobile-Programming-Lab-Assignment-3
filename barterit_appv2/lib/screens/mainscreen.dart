@@ -1,7 +1,7 @@
 import 'package:barterit_appv2/models/user.dart';
 import 'package:barterit_appv2/screens/hometabscreen.dart';
 import 'package:barterit_appv2/screens/profiletabscreen.dart';
-import 'package:barterit_appv2/screens/ownertabscreen.dart';
+import 'package:barterit_appv2/screens/sellertabscreen.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -24,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
     print("Home");
     tabchildren = [
       HomeTabScreen(user: widget.user),
-      OwnerTabScreen(user: widget.user),
+      SellerTabScreen(user: widget.user),
       ProfileTabScreen(user: widget.user),
     ];
   }
@@ -53,7 +53,7 @@ class _MainScreenState extends State<MainScreen> {
                   icon: Icon(
                     Icons.sell,
                   ),
-                  label: "Items"),
+                  label: "Seller"),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.person,
