@@ -21,6 +21,9 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
   late double screenHeight, screenWidth;
   late int axiscount = 2;
   List<Item> itemList = <Item>[];
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      GlobalKey<RefreshIndicatorState>();
+
 
   @override
   void initState() {
@@ -35,6 +38,10 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
     print('dispose');
   }
 
+  Future<void> _refresh() async {
+    loadsellerItems();
+  }
+
   @override
   Widget build(BuildContext context) {
     screenHeight = MediaQuery.of(context).size.height;
@@ -44,87 +51,91 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
     } else {
       axiscount = 2;
     }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(maintitle),
-      ),
-      body: itemList.isEmpty
-          ? const Center(
-              child: Text("No Data"),
-            )
-          : Column(
-              children: [
-                Container(
-                  height: 24,
-                  color: Theme.of(context).colorScheme.primary,
-                  alignment: Alignment.center,
-                  child: Text(
-                    "${itemList.length} Item Found",
-                    style: const TextStyle(color: Colors.white, fontSize: 18),
+    return RefreshIndicator(
+      key: _refreshIndicatorKey,
+      onRefresh: _refresh,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(maintitle),
+        ),
+        body: itemList.isEmpty
+            ? const Center(
+                child: Text("No Data"),
+              )
+            : Column(
+                children: [
+                  Container(
+                    height: 24,
+                    color: Theme.of(context).colorScheme.primary,
+                    alignment: Alignment.center,
+                    child: Text(
+                      "${itemList.length} Item Found",
+                      style: const TextStyle(color: Colors.white, fontSize: 18),
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    children: List.generate(itemList.length, (index) {
-                      return Card(
-                        child: InkWell(
-                          onLongPress: () {
-                            onDeleteDialog(index);
-                          },
-                          child: Column(
-                            children: [
-                              CachedNetworkImage(
-                                width: screenWidth,
-                                fit: BoxFit.cover,
-                                imageUrl:
-                                    "${MyConfig().SERVER}/barterit2/assets/items/${itemList[index].itemId}_1.png",
-                                placeholder: (context, url) =>
-                                    const LinearProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                              ),
-                              Text(
-                                itemList[index].itemName.toString(),
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      children: List.generate(itemList.length, (index) {
+                        return Card(
+                          child: InkWell(
+                            onLongPress: () {
+                              onDeleteDialog(index);
+                            },
+                            child: Column(
+                              children: [
+                                CachedNetworkImage(
+                                  width: screenWidth,
+                                  fit: BoxFit.cover,
+                                  imageUrl:
+                                      "${MyConfig().SERVER}/barterit2/assets/items/${itemList[index].itemId}_1.png",
+                                  placeholder: (context, url) =>
+                                      const LinearProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
                                 ),
-                              ),
-                              Text(
-                                "RM ${double.parse(itemList[index].itemPrice.toString()).toStringAsFixed(2)}",
-                                style: const TextStyle(
-                                  fontSize: 12,
+                                Text(
+                                  itemList[index].itemName.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                "${itemList[index].itemQty} available",
-                                style: const TextStyle(
-                                  fontSize: 10,
+                                Text(
+                                  "RM ${double.parse(itemList[index].itemPrice.toString()).toStringAsFixed(2)}",
+                                  style: const TextStyle(
+                                    fontSize: 12,
+                                  ),
                                 ),
-                              ),
-                            ],
+                                Text(
+                                  "${itemList[index].itemQty} available",
+                                  style: const TextStyle(
+                                    fontSize: 10,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      );
-                    }),
+                        );
+                      }),
+                    ),
                   ),
-                ),
-              ],
-            ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (content) => NewItemScreen(
-                        user: widget.user,
-                      )));
-          loadsellerItems();
-        },
-        child: const Text(
-          "+",
-          style: TextStyle(fontSize: 32),
+                ],
+              ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            await Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (content) => NewItemScreen(
+                          user: widget.user,
+                        )));
+            loadsellerItems();
+          },
+          child: const Text(
+            "+",
+            style: TextStyle(fontSize: 32),
+          ),
         ),
       ),
     );
