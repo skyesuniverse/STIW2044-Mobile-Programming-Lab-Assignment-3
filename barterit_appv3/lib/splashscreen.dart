@@ -8,8 +8,6 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 
@@ -79,7 +77,7 @@ class _SplashScreenState extends State<SplashScreen> {
     if (ischeck) {
       try {
         http.post(
-            Uri.parse("${MyConfig().SERVER}/barterit2/php/login_user.php"),
+            Uri.parse("${MyConfig().SERVER}/barterit3/php/login_user.php"),
             body: {"email": email, "password": password}).then((response) {
           print(response.statusCode);
           print(response.body);
@@ -112,8 +110,7 @@ class _SplashScreenState extends State<SplashScreen> {
       } on TimeoutException catch (_) {
         print("Time out");
       }
-    } 
-    else {
+    } else {
       user = User(
           id: "na",
           name: "na",

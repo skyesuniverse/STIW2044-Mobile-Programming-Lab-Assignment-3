@@ -250,7 +250,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     String email = _emailditingController.text;
     String passa = _passEditingController.text;
 
-    http.post(Uri.parse("${MyConfig().SERVER}/barterit2/php/register_user.php"),
+    http.post(Uri.parse("${MyConfig().SERVER}/barterit3/php/register_user.php"),
         body: {
           "name": name,
           "email": email,

@@ -87,7 +87,7 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
                                   width: screenWidth,
                                   fit: BoxFit.cover,
                                   imageUrl:
-                                      "${MyConfig().SERVER}/barterit2/assets/items/${itemList[index].itemId}_1.png",
+                                      "${MyConfig().SERVER}/barterit3/assets/items/${itemList[index].itemId}_1.png",
                                   placeholder: (context, url) =>
                                       const LinearProgressIndicator(),
                                   errorWidget: (context, url, error) =>
@@ -148,7 +148,7 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
       return;
     }
 
-    http.post(Uri.parse("${MyConfig().SERVER}/barterit2/php/load_items.php"),
+    http.post(Uri.parse("${MyConfig().SERVER}/barterit3/php/load_items.php"),
         body: {"userid": widget.user.id}).then((response) {
       print(response.body);
       //log(response.body);
@@ -204,7 +204,7 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
   }
 
   void deleteCatch(int index) {
-    http.post(Uri.parse("${MyConfig().SERVER}/barterit2/php/delete_catch.php"),
+    http.post(Uri.parse("${MyConfig().SERVER}/barterit3/php/delete_item.php"),
         body: {
           "userid": widget.user.id,
           "itemid": itemList[index].itemId
