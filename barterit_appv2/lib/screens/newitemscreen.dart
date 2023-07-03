@@ -411,7 +411,7 @@ class _NewItemScreenState extends State<NewItemScreen> {
           "longitude": prlong,
           "state": state,
           "locality": locality,
-          "image1": base64Images.length >= 1 ? base64Images[0] : '',
+          "image1": base64Images.isNotEmpty ? base64Images[0] : '',
           "image2": base64Images.length >= 2 ? base64Images[1] : '',
           "image3": base64Images.length >= 3 ? base64Images[2] : '',
         }).then((response) {

@@ -24,7 +24,6 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
 
-
   @override
   void initState() {
     super.initState();
@@ -165,7 +164,6 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
         }
         setState(() {});
       }
-      setState(() {});
     });
   }
 
@@ -221,7 +219,7 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
           loadsellerItems();
         } else {
           ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text("Failed")));
+              .showSnackBar(const SnackBar(content: Text("Delete Failed")));
         }
       }
     });
