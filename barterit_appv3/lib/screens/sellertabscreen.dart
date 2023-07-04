@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:barterit_appv2/models/item.dart';
 import 'package:barterit_appv2/models/user.dart';
 import 'package:barterit_appv2/myconfig.dart';
@@ -23,6 +24,7 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
   List<Item> itemList = <Item>[];
   final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
       GlobalKey<RefreshIndicatorState>();
+  TextEditingController searchController = TextEditingController();
 
   @override
   void initState() {
@@ -56,6 +58,13 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(maintitle),
+          actions: [
+            IconButton(
+                onPressed: () {
+                  showsearchDialog();
+                },
+                icon: const Icon(Icons.search))
+          ],
         ),
         body: itemList.isEmpty
             ? const Center(
@@ -221,6 +230,85 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
           ScaffoldMessenger.of(context)
               .showSnackBar(const SnackBar(content: Text("Delete Failed")));
         }
+      }
+    });
+  }
+
+  void showsearchDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          ),
+          title: const Text(
+            "Search?",
+            style: TextStyle(),
+          ),
+          content: Container(
+            width: double.maxFinite,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: searchController,
+                      decoration: const InputDecoration(
+                        labelText: 'Search',
+                        labelStyle: TextStyle(),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(width: 2.0),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      String search = searchController.text;
+                      searchItem(search);
+                      Navigator.of(context).pop();
+                    },
+                    child: const Text("Search"),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                "Close",
+                style: TextStyle(),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void searchItem(String search) {
+    http.post(Uri.parse("${MyConfig().SERVER}/barterit3/php/load_items.php"),
+        body: {"search": search}).then((response) {
+      //print(response.body);
+      log(response.body);
+      itemList.clear();
+      if (response.statusCode == 200) {
+        var jsondata = jsonDecode(response.body);
+        if (jsondata['status'] == "success") {
+          var extractdata = jsondata['data'];
+          extractdata['items'].forEach((v) {
+            itemList.add(Item.fromJson(v));
+          });
+          print(itemList[0].itemName);
+        }
+        setState(() {});
       }
     });
   }

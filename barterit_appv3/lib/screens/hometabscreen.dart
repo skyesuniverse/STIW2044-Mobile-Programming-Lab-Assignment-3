@@ -23,8 +23,9 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
   late double screenHeight, screenWidth;
   late int axiscount = 2;
   //code below is for pagination
-  // int numofpage = 1, curpage = 1;
-  // int numberofresult = 0;
+  int numofpage = 1, curpage = 1;
+  int numberofresult = 0;
+  var color;
 
   TextEditingController searchController = TextEditingController();
 
@@ -133,8 +134,62 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                           );
                         },
                       ))),
+              ////section for pagination
+              SizedBox(
+                height: 28,
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: numofpage,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    //build the list for textbutton with scroll
+                    if ((curpage - 1) == index) {
+                      //set current page number active
+                      color = Colors.black87;
+                    } else {
+                      color = Colors.black38;
+                    }
+                    return TextButton(
+                        onPressed: () {
+                          curpage = index + 1;
+                          loadItems(index + 1);
+                        },
+                        child: Text(
+                          (index + 1).toString(),
+                          style: TextStyle(color: color, fontSize: 11),
+                        ));
+                  },
+                ),
+              ),
             ]),
     );
+  }
+
+  void loadItems(int page) {
+    http.post(Uri.parse("${MyConfig().SERVER}/barterit3/php/load_items.php"),
+        // body: {}).then((response) {
+        body: {"pageno": page.toString()}).then((response) {
+      // code for pagination purpose above is ori code without pagination
+      //print(response.body);
+      log(response.body);
+      itemList.clear();
+      if (response.statusCode == 200) {
+        var jsondata = jsonDecode(response.body);
+        if (jsondata['status'] == "success") {
+          //////////////////below code is for pagination purpose
+          numofpage = int.parse(jsondata['numofpage']); //get number of pages
+          numberofresult = int.parse(jsondata['numberofresult']);
+          print(numberofresult);
+          /////////////////above code is for pagination purpose
+          var extractdata = jsondata['data'];
+          extractdata['items'].forEach((v) {
+            itemList.add(Item.fromJson(v));
+          });
+          print(itemList[0].itemName);
+        }
+        setState(() {});
+      }
+    });
   }
 
   void showsearchDialog() {
@@ -205,33 +260,6 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
       if (response.statusCode == 200) {
         var jsondata = jsonDecode(response.body);
         if (jsondata['status'] == "success") {
-          var extractdata = jsondata['data'];
-          extractdata['catches'].forEach((v) {
-            itemList.add(Item.fromJson(v));
-          });
-          print(itemList[0].itemName);
-        }
-        setState(() {});
-      }
-    });
-  }
-
-  void loadItems(int page) {
-    http.post(Uri.parse("${MyConfig().SERVER}/barterit3/php/load_items.php"),
-        // body: {}).then((response) {
-        body: {"pageno": page.toString()}).then((response) {
-      // code for pagination purpose above is ori code without pagination
-      //print(response.body);
-      log(response.body);
-      itemList.clear();
-      if (response.statusCode == 200) {
-        var jsondata = jsonDecode(response.body);
-        if (jsondata['status'] == "success") {
-          //////////////////below code is for pagination purpose
-          // numofpage = int.parse(jsondata['numofpage']); //get number of pages
-          // numberofresult = int.parse(jsondata['numberofresult']);
-          // print(numberofresult);
-          /////////////////above code is for pagination purpose
           var extractdata = jsondata['data'];
           extractdata['items'].forEach((v) {
             itemList.add(Item.fromJson(v));
