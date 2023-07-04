@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:barterit_appv2/models/item.dart';
 import 'package:barterit_appv2/models/user.dart';
 import 'package:barterit_appv2/myconfig.dart';
+import 'package:barterit_appv2/screens/edititemdetailsscreen.dart';
 import 'package:barterit_appv2/screens/newitemscreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +90,19 @@ class _SellerTabScreenState extends State<SellerTabScreen> {
                           child: InkWell(
                             onLongPress: () {
                               onDeleteDialog(index);
+                            },
+                            onTap: () async {
+                              Item singleItem =
+                                  Item.fromJson(itemList[index].toJson());
+                              await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (content) =>
+                                          EditItemDetailsScreen(
+                                            user: widget.user,
+                                            useritem: singleItem,
+                                          )));
+                              loadsellerItems();
                             },
                             child: Column(
                               children: [
