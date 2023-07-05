@@ -1,11 +1,14 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:barterit_appv2/models/item.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-
+import 'package:http/http.dart' as http;
 import '../models/user.dart';
+import '../myconfig.dart';
 
 class EditItemDetailsScreen extends StatefulWidget {
   final User user;
@@ -20,7 +23,9 @@ class EditItemDetailsScreen extends StatefulWidget {
 class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
   late double screenHeight, screenWidth, cardwitdh;
   File? _image;
-  var pathAsset = "assets/images/camera.png";
+  // var pathAsset = "assets/images/camera.png";
+  var pathAsset = "assets/images/1_1";
+
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _itemnameEditingController =
@@ -65,7 +70,7 @@ class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
     _itemqtyEditingController.text = widget.useritem.itemQty.toString();
     _prstateEditingController.text = widget.useritem.itemState.toString();
     _prlocalEditingController.text = widget.useritem.itemLocality.toString();
-    selectedCategory = widget.useritem.itemCategory.toString();
+    // selectedCategory = widget.useritem.itemCategory.toString();
   }
 
   @override
@@ -95,22 +100,17 @@ class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
                     CarouselSlider(
                       items: [
                         for (var i = 0; i < selectedImages.length; i++)
-                          GestureDetector(
-                            // onTap: () {
-                            //   selectFromGallery(i);
-                            // },
-                            child: Card(
-                              child: Container(
-                                width: screenWidth,
-                                decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    image: selectedImages[i] == null
-                                        ? AssetImage(pathAsset)
-                                        : FileImage(selectedImages[i]!)
-                                            as ImageProvider,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                          Card(
+                            child: Container(
+                              width: screenWidth,
+                              child: CachedNetworkImage(
+                                placeholder: (context, url) =>
+                                    const CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    const Icon(Icons.error),
+                                imageUrl:
+                                    "${MyConfig().SERVER}/barterit3/assets/items/${widget.useritem.itemId}_${i + 1}.png",
+                                // fit: BoxFit.cover,
                               ),
                             ),
                           )
@@ -296,7 +296,7 @@ class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
                         height: 50,
                         child: ElevatedButton(
                             onPressed: () {
-                              insertDialog();
+                              updateDialog();
                             },
                             child: const Text("Update Item")),
                       )
@@ -311,9 +311,83 @@ class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
     );
   }
 
-  void _determinePosition() {}
+  void updateDialog() {
+    if (!_formKey.currentState!.validate()) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Check your input")));
+      return;
+    }
 
-  // void selectFromGallery(int i) {}
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(10.0))),
+          title: const Text(
+            "Update your item details?",
+            style: TextStyle(),
+          ),
+          content: const Text("Are you sure?", style: TextStyle()),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                "Yes",
+                style: TextStyle(),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+                updateCatch();
+                //registerUser();
+              },
+            ),
+            TextButton(
+              child: const Text(
+                "No",
+                style: TextStyle(),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
-  void insertDialog() {}
+  void updateCatch() {
+    String itemname = _itemnameEditingController.text;
+    String itemdesc = _itemdescEditingController.text;
+    String itemprice = _itempriceEditingController.text;
+    String itemqty = _itemqtyEditingController.text;
+
+    http.post(Uri.parse("${MyConfig().SERVER}/barterit3/php/update_item.php"),
+        body: {
+          "itemid": widget.useritem.itemId,
+          "itemname": itemname,
+          "itemdesc": itemdesc,
+          "itemprice": itemprice,
+          "itemqty": itemqty,
+          "category": selectedCategory,
+        }).then((response) {
+      print(response.body);
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        var jsondata = jsonDecode(response.body);
+        if (jsondata['status'] == 'success') {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(const SnackBar(content: Text("Update Success")));
+          Navigator.pop(context);
+        } else {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(const SnackBar(content: Text("Update Failed")));
+        }
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Update Failed")));
+        Navigator.pop(context);
+      }
+    });
+  }
 }
