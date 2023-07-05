@@ -116,6 +116,7 @@ class _NewItemScreenState extends State<NewItemScreen> {
                         enableInfiniteScroll: false,
                         autoPlayAnimationDuration: Duration(milliseconds: 800),
                         viewportFraction: 0.8,
+                      
                       ),
                     )
                   ],

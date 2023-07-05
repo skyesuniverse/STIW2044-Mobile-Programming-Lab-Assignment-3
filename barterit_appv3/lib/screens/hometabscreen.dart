@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:barterit_appv2/myconfig.dart';
+import 'package:barterit_appv2/screens/itemdetailsscreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -85,17 +86,17 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                           return Card(
                             child: InkWell(
                               onTap: () {
-                                // Item useritem =
-                                //     Item.fromJson(itemList[index].toJson());
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (content) => itemDetailsScreen(
-                                //       user: widget.user,
-                                //       usercatch: usercatch,
-                                //     ),
-                                //   ),
-                                // );
+                                Item useritem =
+                                    Item.fromJson(itemList[index].toJson());
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (content) => ItemDetailsScreen(
+                                      user: widget.user,
+                                      useritem: useritem,
+                                    ),
+                                  ),
+                                );
                               },
                               child: Column(
                                 children: [
