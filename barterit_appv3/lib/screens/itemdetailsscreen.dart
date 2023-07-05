@@ -19,6 +19,8 @@ class ItemDetailsScreen extends StatefulWidget {
 }
 
 class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
+  // final CarouselController carouselController = CarouselController();
+  // int currenIndex = 0;
   late double screenHeight, screenWidth, cardwitdh;
   List<File?> selectedImages = [null, null, null];
   @override
@@ -40,9 +42,8 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
         ),
         centerTitle: true,
       ),
-      body: SafeArea(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Stack(
           //   children: [
@@ -60,131 +61,171 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
           //     )
           //   ],
           // ),
-          Container(
-            height: MediaQuery.of(context).size.height / 3,
-            width: MediaQuery.of(context).size.width,
+          Flexible(
+            flex: 4,
+            // height: MediaQuery.of(context).size.height / 3,
+            // width: MediaQuery.of(context).size.width,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 4),
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
               child: Card(
                 child: ListView(
                   children: [
-                    CarouselSlider(
-                      items: [
-                        for (var i = 0; i < selectedImages.length; i++)
-                          Card(
-                            child: Container(
-                              width: screenWidth,
-                              child: CachedNetworkImage(
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                                imageUrl:
-                                    "${MyConfig().SERVER}/barterit3/assets/items/${widget.useritem.itemId}_${i + 1}.png",
-                                // fit: BoxFit.cover,
-                              ),
-                            ),
-                          )
+                    Stack(
+                      children: [
+                        CarouselSlider(
+                          // carouselController: carouselController,
+                          items: [
+                            for (var i = 0; i < selectedImages.length; i++)
+                              Container(
+                                alignment: Alignment.center,
+                                width: screenWidth,
+                                child: CachedNetworkImage(
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                  imageUrl:
+                                      "${MyConfig().SERVER}/barterit3/assets/items/${widget.useritem.itemId}_${i + 1}.png",
+                                  // fit: BoxFit.cover,
+                                ),
+                              )
+                          ],
+                          options: CarouselOptions(
+                            // height: 260.0,
+                            // enlargeCenterPage: true,
+                            autoPlay: true,
+                            // aspectRatio: 3 / 2,
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enableInfiniteScroll: false,
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            viewportFraction: 1.0,
+                            // onPageChanged: (index, reason) {
+                            //   setState(() {
+                            //     currenIndex = index;
+                            //   });
+                            // },
+                          ),
+                        ),
                       ],
-                      options: CarouselOptions(
-                        height: 180.0,
-                        enlargeCenterPage: true,
-                        autoPlay: true,
-                        aspectRatio: 16 / 9,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enableInfiniteScroll: false,
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        viewportFraction: 0.8,
-                      ),
-                    )
+                    ),
+                    // Positioned(
+                    //   bottom: 16,
+                    //   left: 0,
+                    //   right: 0,
+                    //   child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: selectedImages.asMap().entries.map((entry) {
+                    //       return GestureDetector(
+                    //         onTap: () =>
+                    //             carouselController.animateToPage(entry.key),
+                    //         child: Container(
+                    //           width: currenIndex == entry.key ? 17 : 7,
+                    //           height: 5.0,
+                    //           margin: const EdgeInsets.symmetric(
+                    //             horizontal: 3.0,
+                    //           ),
+                    //           decoration: BoxDecoration(
+                    //               borderRadius: BorderRadius.circular(10),
+                    //               color: currenIndex == entry.key
+                    //                   ? Colors.red
+                    //                   : Colors.teal),
+                    //         ),
+                    //       );
+                    //     }).toList(),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),
             ),
           ),
           // SizedBox(height: 5),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      widget.useritem.itemName.toString(),
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      "RM ${double.parse(widget.useritem.itemPrice.toString()).toStringAsFixed(2)}",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 8),
-                Text(
-                  widget.useritem.itemCategory.toString(),
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.grey,
-                  ),
-                ),
-                SizedBox(height: 20),
-                ////////Price
-
-                ////////Description
-                Text(
-                  widget.useritem.itemDesc.toString(),
-                  textAlign: TextAlign.justify,
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-                SizedBox(height: 22),
-                ////////Location
-                Container(
-                  alignment: Alignment.bottomLeft,
-                  child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.center,
+          Expanded(
+            flex: 6,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // SizedBox(width: 7),
-                      Icon(Icons.location_on, color: Colors.grey),
-                      SizedBox(width: 5),
-                      Flexible(
-                        child: Text(
-                          widget.useritem.itemLocality.toString(),
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.grey,
-                          ),
+                      Text(
+                        widget.useritem.itemName.toString(),
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(width: 25),
-                      Icon(Icons.flag_sharp, color: Colors.grey),
-                      SizedBox(width: 5),
-                      Flexible(
-                        child: Text(
-                          widget.useritem.itemState.toString(),
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            color: Colors.grey,
-                          ),
+                      Text(
+                        "RM ${double.parse(widget.useritem.itemPrice.toString()).toStringAsFixed(2)}",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
                     ],
                   ),
-                )
-              ],
+                  SizedBox(height: 8),
+                  Text(
+                    widget.useritem.itemCategory.toString(),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  ////////Price
+
+                  ////////Description
+                  Text(
+                    widget.useritem.itemDesc.toString(),
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  SizedBox(height: 22),
+                  ////////Location
+                  Container(
+                    alignment: Alignment.bottomLeft,
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // SizedBox(width: 7),
+                        Icon(Icons.location_on, color: Colors.grey),
+                        SizedBox(width: 5),
+                        Flexible(
+                          child: Text(
+                            widget.useritem.itemLocality.toString(),
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 25),
+                        Icon(Icons.flag_sharp, color: Colors.grey),
+                        SizedBox(width: 5),
+                        Flexible(
+                          child: Text(
+                            widget.useritem.itemState.toString(),
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           )
         ],
-      )),
+      ),
     );
   }
 }

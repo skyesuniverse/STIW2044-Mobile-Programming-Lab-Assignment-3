@@ -93,39 +93,43 @@ class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
           Flexible(
             flex: 4,
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
+              padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
               child: Card(
                 child: ListView(
                   children: [
-                    CarouselSlider(
-                      items: [
-                        for (var i = 0; i < selectedImages.length; i++)
-                          Card(
-                            child: Container(
-                              width: screenWidth,
-                              child: CachedNetworkImage(
-                                placeholder: (context, url) =>
-                                    const CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    const Icon(Icons.error),
-                                imageUrl:
-                                    "${MyConfig().SERVER}/barterit3/assets/items/${widget.useritem.itemId}_${i + 1}.png",
-                                // fit: BoxFit.cover,
-                              ),
-                            ),
-                          )
+                    Stack(
+                      children: [
+                        CarouselSlider(
+                          items: [
+                            for (var i = 0; i < selectedImages.length; i++)
+                              Container(
+                                alignment: Alignment.center,
+                                width: screenWidth,
+                                child: CachedNetworkImage(
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) =>
+                                      const Icon(Icons.error),
+                                  imageUrl:
+                                      "${MyConfig().SERVER}/barterit3/assets/items/${widget.useritem.itemId}_${i + 1}.png",
+                                  // fit: BoxFit.cover,
+                                ),
+                              )
+                          ],
+                          options: CarouselOptions(
+                            // height: 180.0,
+                            // enlargeCenterPage: true,
+                            autoPlay: true,
+                            // aspectRatio: 16 / 9,
+                            autoPlayCurve: Curves.fastOutSlowIn,
+                            enableInfiniteScroll: false,
+                            autoPlayAnimationDuration:
+                                Duration(milliseconds: 800),
+                            viewportFraction: 1.0,
+                          ),
+                        ),
                       ],
-                      options: CarouselOptions(
-                        height: 180.0,
-                        enlargeCenterPage: true,
-                        autoPlay: true,
-                        aspectRatio: 16 / 9,
-                        autoPlayCurve: Curves.fastOutSlowIn,
-                        enableInfiniteScroll: false,
-                        autoPlayAnimationDuration: Duration(milliseconds: 800),
-                        viewportFraction: 0.8,
-                      ),
-                    )
+                    ),
                   ],
                 ),
               ),
