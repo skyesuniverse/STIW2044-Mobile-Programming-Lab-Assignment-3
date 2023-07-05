@@ -1,9 +1,7 @@
-import 'package:barterit_appv2/models/user.dart';
 import 'package:barterit_appv2/screens/loginscreen.dart';
 import 'package:barterit_appv2/screens/registrationscreen.dart';
-import 'package:barterit_appv2/splashscreen.dart';
+
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -13,6 +11,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late List<Widget> tabchildren;
+
   String maintitle = 'Profile';
   late double screenHeight, screenWidth, cardwitdh;
 
@@ -68,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       children: [
                         Text(
-                          'na',
+                          'Guest',
                           style: const TextStyle(fontSize: 24),
                         ),
                         Text('na'),

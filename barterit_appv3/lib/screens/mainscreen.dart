@@ -3,6 +3,7 @@ import 'package:barterit_appv2/screens/hometabscreen.dart';
 import 'package:barterit_appv2/screens/profilescreen.dart';
 import 'package:barterit_appv2/screens/profiletabscreen.dart';
 import 'package:barterit_appv2/screens/sellertabscreen.dart';
+
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -26,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
     tabchildren = [
       HomeTabScreen(user: widget.user),
       SellerTabScreen(user: widget.user),
-      ProfileTabScreen(user: widget.user),
+      // ProfileTabScreen(user: widget.user),
       widget.user.id.toString() == "na"
           ? const ProfileScreen()
           : ProfileTabScreen(user: widget.user)

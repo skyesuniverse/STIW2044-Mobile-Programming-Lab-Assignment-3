@@ -140,7 +140,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
               ),
             ),
           ),
-          // SizedBox(height: 5),
+          SizedBox(height: 10),
           Expanded(
             flex: 6,
             child: Padding(
@@ -172,7 +172,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                     widget.useritem.itemCategory.toString(),
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey,
+                      color: Colors.grey[700],
                     ),
                   ),
                   SizedBox(height: 20),
