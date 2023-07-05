@@ -102,34 +102,84 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          // SizedBox(height: 5),
           Padding(
             padding: EdgeInsets.all(20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  widget.useritem.itemName.toString(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      widget.useritem.itemName.toString(),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "RM ${double.parse(widget.useritem.itemPrice.toString()).toStringAsFixed(2)}",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(height: 5),
+                SizedBox(height: 8),
                 Text(
-                  "RM ${double.parse(widget.useritem.itemPrice.toString()).toStringAsFixed(2)}",
+                  widget.useritem.itemCategory.toString(),
                   style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 12,
+                    color: Colors.grey,
                   ),
                 ),
                 SizedBox(height: 20),
+                ////////Price
+
+                ////////Description
                 Text(
                   widget.useritem.itemDesc.toString(),
+                  textAlign: TextAlign.justify,
                   style: TextStyle(
                     fontSize: 15,
                   ),
                 ),
+                SizedBox(height: 22),
+                ////////Location
+                Container(
+                  alignment: Alignment.bottomLeft,
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // SizedBox(width: 7),
+                      Icon(Icons.location_on, color: Colors.grey),
+                      SizedBox(width: 5),
+                      Flexible(
+                        child: Text(
+                          widget.useritem.itemLocality.toString(),
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 25),
+                      Icon(Icons.flag_sharp, color: Colors.grey),
+                      SizedBox(width: 5),
+                      Flexible(
+                        child: Text(
+                          widget.useritem.itemState.toString(),
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           )
