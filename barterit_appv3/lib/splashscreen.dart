@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:barterit_appv2/screens/hometabscreen.dart';
+
 import 'models/user.dart';
 import 'package:barterit_appv2/myconfig.dart';
 import 'package:barterit_appv2/screens/loginscreen.dart';
@@ -82,8 +84,8 @@ class _SplashScreenState extends State<SplashScreen> {
           print(response.statusCode);
           print(response.body);
           var jsondata = jsonDecode(response.body);
-          //if (response.statusCode == 200 && jsondata['data'] != null) {
-          if (response.statusCode == 200) {
+          if (response.statusCode == 200 && jsondata['data'] != null) {
+            // if (response.statusCode == 200) {
             user = User.fromJson(jsondata['data']);
             Timer(
                 const Duration(seconds: 3),
@@ -104,7 +106,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 () => Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
-                        builder: (content) => const LoginScreen())));
+                        builder: (content) => MainScreen(user: user))));
           }
         }).timeout(const Duration(seconds: 5), onTimeout: () {});
       } on TimeoutException catch (_) {
@@ -121,7 +123,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Timer(
           const Duration(seconds: 3),
           () => Navigator.pushReplacement(context,
-              MaterialPageRoute(builder: (content) => const LoginScreen())));
+              MaterialPageRoute(builder: (content) => MainScreen(user: user))));
     }
   }
 }

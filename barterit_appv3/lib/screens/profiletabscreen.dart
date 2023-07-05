@@ -93,60 +93,6 @@ class _ProfileTabScreenState extends State<ProfileTabScreen> {
                 ]),
               ),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(right: 40.0, left: 40.0, top: 0),
-                  child: ElevatedButton(
-                    onPressed: onLogin,
-                    child: const Text(
-                      'Log In',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.only(top: 8, bottom: 5),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadiusDirectional.circular(25.0),
-                        // side: BorderSide(color: Colors.black),
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(right: 40.0, left: 40.0, top: 0),
-                  child: TextButton(
-                    onPressed: onRegister,
-                    child: const Text(
-                      'Registration',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    style: ButtonStyle(
-                      padding: MaterialStatePropertyAll<EdgeInsetsGeometry>(
-                        EdgeInsets.only(top: 8, bottom: 5),
-                      ),
-                      shape: MaterialStateProperty.all<OutlinedBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25.0),
-                          side: const BorderSide(
-                            color: Colors.teal,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),
@@ -188,27 +134,5 @@ class _ProfileTabScreenState extends State<ProfileTabScreen> {
         );
       },
     );
-  }
-
-  void onRegister() {
-    String userid = widget.user.id.toString();
-    if (userid.isEmpty) {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (content) => const RegistrationScreen()));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("You are not allow to register. Please log out.")));
-    }
-  }
-
-  void onLogin() {
-    String userid = widget.user.id.toString();
-    if (userid.isEmpty) {
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (content) => const RegistrationScreen()));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text("You are not allow to login. Please log out.")));
-    }
   }
 }

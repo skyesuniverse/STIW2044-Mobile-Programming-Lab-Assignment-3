@@ -11,7 +11,6 @@ import '../models/user.dart';
 
 class HomeTabScreen extends StatefulWidget {
   final User user;
-
   const HomeTabScreen({super.key, required this.user});
 
   @override
@@ -146,7 +145,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                     //build the list for textbutton with scroll
                     if ((curpage - 1) == index) {
                       //set current page number active
-                      color = Colors.black87;
+                      color = Colors.black;
                     } else {
                       color = Colors.black38;
                     }
@@ -157,7 +156,10 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                         },
                         child: Text(
                           (index + 1).toString(),
-                          style: TextStyle(color: color, fontSize: 11),
+                          style: TextStyle(
+                              color: color,
+                              fontSize: 11,
+                              fontWeight: FontWeight.bold),
                         ));
                   },
                 ),
