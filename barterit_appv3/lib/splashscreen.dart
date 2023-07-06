@@ -1,10 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'package:barterit_appv2/screens/hometabscreen.dart';
-
 import 'models/user.dart';
 import 'package:barterit_appv2/myconfig.dart';
-import 'package:barterit_appv2/screens/loginscreen.dart';
 import 'package:barterit_appv2/screens/mainscreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -57,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
               CircularProgressIndicator(),
               Text(
-                "Version 1.0",
+                "Version 3.0",
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,

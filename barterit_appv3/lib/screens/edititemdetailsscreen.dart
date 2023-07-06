@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:barterit_appv2/models/item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import '../models/user.dart';
 import '../myconfig.dart';
@@ -23,7 +21,6 @@ class EditItemDetailsScreen extends StatefulWidget {
 class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
   late double screenHeight, screenWidth, cardwitdh;
   File? _image;
-  // var pathAsset = "assets/images/camera.png";
   var pathAsset = "assets/images/1_1";
 
   final _formKey = GlobalKey<FormState>();
@@ -51,7 +48,6 @@ class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
     "Toys or Hobbies",
   ];
 
-  // late Position _currentPosition;
   String curaddress = "";
   String curstate = "";
   String prlat = "";
@@ -62,7 +58,6 @@ class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    // _determinePosition();
     _itemnameEditingController.text = widget.useritem.itemName.toString();
     _itemdescEditingController.text = widget.useritem.itemDesc.toString();
     _itempriceEditingController.text =
@@ -70,7 +65,6 @@ class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
     _itemqtyEditingController.text = widget.useritem.itemQty.toString();
     _prstateEditingController.text = widget.useritem.itemState.toString();
     _prlocalEditingController.text = widget.useritem.itemLocality.toString();
-    // selectedCategory = widget.useritem.itemCategory.toString();
   }
 
   @override
@@ -81,12 +75,6 @@ class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Updadte Item Details"),
-        // actions: [
-        //   IconButton(
-        //       onPressed: () {
-        //         _determinePosition();
-        //       },
-        //       icon: const Icon(Icons.refresh))],
       ),
       body: Column(
         children: [
@@ -117,10 +105,7 @@ class _EditItemDetailsScreenState extends State<EditItemDetailsScreen> {
                               )
                           ],
                           options: CarouselOptions(
-                            // height: 180.0,
-                            // enlargeCenterPage: true,
                             autoPlay: true,
-                            // aspectRatio: 16 / 9,
                             autoPlayCurve: Curves.fastOutSlowIn,
                             enableInfiniteScroll: false,
                             autoPlayAnimationDuration:

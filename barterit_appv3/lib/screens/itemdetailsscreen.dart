@@ -1,9 +1,7 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-
 import '../models/item.dart';
 import '../models/user.dart';
 import '../myconfig.dart';
@@ -19,8 +17,6 @@ class ItemDetailsScreen extends StatefulWidget {
 }
 
 class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
-  // final CarouselController carouselController = CarouselController();
-  // int currenIndex = 0;
   late double screenHeight, screenWidth, cardwitdh;
   List<File?> selectedImages = [null, null, null];
   @override
@@ -43,28 +39,9 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
         centerTitle: true,
       ),
       body: Column(
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Stack(
-          //   children: [
-          //     Padding(
-          //       padding: EdgeInsets.only(left: 10, top: 15),
-          //       child: InkWell(
-          //         onTap: () {
-          //           Navigator.pop(context);
-          //         },
-          //         child: Icon(
-          //           Icons.arrow_back_ios_new_outlined,
-          //           size: 30,
-          //         ),
-          //       ),
-          //     )
-          //   ],
-          // ),
           Flexible(
             flex: 4,
-            // height: MediaQuery.of(context).size.height / 3,
-            // width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
               child: Card(
@@ -73,7 +50,6 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                     Stack(
                       children: [
                         CarouselSlider(
-                          // carouselController: carouselController,
                           items: [
                             for (var i = 0; i < selectedImages.length; i++)
                               Container(
@@ -86,55 +62,20 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                                       const Icon(Icons.error),
                                   imageUrl:
                                       "${MyConfig().SERVER}/barterit3/assets/items/${widget.useritem.itemId}_${i + 1}.png",
-                                  // fit: BoxFit.cover,
                                 ),
                               )
                           ],
                           options: CarouselOptions(
-                            // height: 260.0,
-                            // enlargeCenterPage: true,
                             autoPlay: true,
-                            // aspectRatio: 3 / 2,
                             autoPlayCurve: Curves.fastOutSlowIn,
                             enableInfiniteScroll: false,
                             autoPlayAnimationDuration:
                                 Duration(milliseconds: 800),
                             viewportFraction: 1.0,
-                            // onPageChanged: (index, reason) {
-                            //   setState(() {
-                            //     currenIndex = index;
-                            //   });
-                            // },
                           ),
                         ),
                       ],
                     ),
-                    // Positioned(
-                    //   bottom: 16,
-                    //   left: 0,
-                    //   right: 0,
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    //     children: selectedImages.asMap().entries.map((entry) {
-                    //       return GestureDetector(
-                    //         onTap: () =>
-                    //             carouselController.animateToPage(entry.key),
-                    //         child: Container(
-                    //           width: currenIndex == entry.key ? 17 : 7,
-                    //           height: 5.0,
-                    //           margin: const EdgeInsets.symmetric(
-                    //             horizontal: 3.0,
-                    //           ),
-                    //           decoration: BoxDecoration(
-                    //               borderRadius: BorderRadius.circular(10),
-                    //               color: currenIndex == entry.key
-                    //                   ? Colors.red
-                    //                   : Colors.teal),
-                    //         ),
-                    //       );
-                    //     }).toList(),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
@@ -176,9 +117,6 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                     ),
                   ),
                   SizedBox(height: 20),
-                  ////////Price
-
-                  ////////Description
                   Text(
                     widget.useritem.itemDesc.toString(),
                     textAlign: TextAlign.justify,
@@ -191,9 +129,7 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen> {
                   Container(
                     alignment: Alignment.bottomLeft,
                     child: Row(
-                      // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // SizedBox(width: 7),
                         Icon(Icons.location_on, color: Colors.grey),
                         SizedBox(width: 5),
                         Flexible(

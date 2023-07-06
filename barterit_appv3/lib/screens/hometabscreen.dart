@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:barterit_appv2/myconfig.dart';
 import 'package:barterit_appv2/screens/itemdetailsscreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -84,10 +83,10 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                         (index) {
                           return Card(
                             child: InkWell(
-                              onTap: () {
+                              onTap: () async {
                                 Item useritem =
                                     Item.fromJson(itemList[index].toJson());
-                                Navigator.push(
+                                await Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (content) => ItemDetailsScreen(
@@ -96,6 +95,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                                     ),
                                   ),
                                 );
+                                loadItems(1);
                               },
                               child: Column(
                                 children: [
@@ -169,6 +169,15 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
   }
 
   void loadItems(int page) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return const AlertDialog(
+          title: Text("Loading..."),
+          content: CircularProgressIndicator(),
+        );
+      },
+    );
     http.post(Uri.parse("${MyConfig().SERVER}/barterit3/php/load_items.php"),
         // body: {}).then((response) {
         body: {"pageno": page.toString()}).then((response) {
@@ -179,11 +188,9 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
       if (response.statusCode == 200) {
         var jsondata = jsonDecode(response.body);
         if (jsondata['status'] == "success") {
-          //////////////////below code is for pagination purpose
           numofpage = int.parse(jsondata['numofpage']); //get number of pages
           numberofresult = int.parse(jsondata['numberofresult']);
           print(numberofresult);
-          /////////////////above code is for pagination purpose
           var extractdata = jsondata['data'];
           extractdata['items'].forEach((v) {
             itemList.add(Item.fromJson(v));

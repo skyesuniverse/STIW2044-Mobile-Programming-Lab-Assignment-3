@@ -20,8 +20,6 @@ class NewItemScreen extends StatefulWidget {
 }
 
 class _NewItemScreenState extends State<NewItemScreen> {
-  // final CarouselController carouselController = CarouselController();
-  // int currenIndex = 0;
   late double screenHeight, screenWidth, cardwitdh;
   File? _image;
   var pathAsset = "assets/images/camera.png";
@@ -90,7 +88,6 @@ class _NewItemScreenState extends State<NewItemScreen> {
                     Stack(
                       children: [
                         CarouselSlider(
-                          // carouselController: carouselController,
                           items: [
                             for (var i = 0; i < selectedImages.length; i++)
                               GestureDetector(
@@ -105,57 +102,22 @@ class _NewItemScreenState extends State<NewItemScreen> {
                                           ? AssetImage(pathAsset)
                                           : FileImage(selectedImages[i]!)
                                               as ImageProvider,
-                                      // fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
                               ),
                           ],
                           options: CarouselOptions(
-                            // height: 260.0,
-                            // enlargeCenterPage: true,
                             autoPlay: true,
-                            // aspectRatio: 3 / 2,
                             autoPlayCurve: Curves.fastOutSlowIn,
                             enableInfiniteScroll: false,
                             autoPlayAnimationDuration:
                                 Duration(milliseconds: 800),
                             viewportFraction: 1.0,
-                            // onPageChanged: (index, reason) {
-                            //   setState(() {
-                            //     currenIndex = index;
-                            //   });
-                            // },
                           ),
                         ),
                       ],
                     ),
-                    // Positioned(
-                    //   bottom: 10,
-                    //   left: 0,
-                    //   right: 0,
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    //     children: selectedImages.asMap().entries.map((entry) {
-                    //       return GestureDetector(
-                    //         onTap: () =>
-                    //             carouselController.animateToPage(entry.key),
-                    //         child: Container(
-                    //           width: currenIndex == entry.key ? 17 : 7,
-                    //           height: 5.0,
-                    //           margin: const EdgeInsets.symmetric(
-                    //             horizontal: 3.0,
-                    //           ),
-                    //           decoration: BoxDecoration(
-                    //               borderRadius: BorderRadius.circular(10),
-                    //               color: currenIndex == entry.key
-                    //                   ? Colors.red
-                    //                   : Colors.teal),
-                    //         ),
-                    //       );
-                    //     }).toList(),
-                    //   ),
-                    // ),
                   ],
                 ),
               ),
@@ -358,8 +320,6 @@ class _NewItemScreenState extends State<NewItemScreen> {
             toolbarWidgetColor: Colors.white,
             initAspectRatio: CropAspectRatioPreset.ratio3x2,
             lockAspectRatio: true),
-        //showCropGrid: true,
-        //showRotationGrid: true,
         IOSUiSettings(
           title: 'Cropper',
         ),
