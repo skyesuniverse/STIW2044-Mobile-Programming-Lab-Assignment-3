@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2023 at 05:12 PM
+-- Generation Time: Jul 06, 2023 at 07:01 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `barterit2_db`
+-- Database: `barterit3_db`
 --
 
 -- --------------------------------------------------------
@@ -47,7 +47,14 @@ CREATE TABLE `tbl_items` (
 --
 
 INSERT INTO `tbl_items` (`item_id`, `user_id`, `item_name`, `item_desc`, `item_category`, `item_price`, `item_qty`, `item_lat`, `item_long`, `item_state`, `item_locality`, `item_date`) VALUES
-(3, 1, 'Ikea Sofa', 'Brown Ikea Sofa', 'Furniture', 3600, 2, '6.4502267', '100.4958833', 'Kedah', 'Changlun', '2023-06-12');
+(1, 1, 'Monitor ', 'LG Monitor with IPS technology highlights the performance of liquid crystal displays. Response times are shortened, color reproduction is improved, and users can view the screen at wide angles.', 'Electronics', 458, 1, '4.6005117', '101.0757833', 'Perak', 'Ipoh', '2023-07-05'),
+(2, 1, 'Skateboard', 'WhiteFang Skateboards for Beginners, Complete Skateboard 31 x 7.88, 7 Layer Canadian Maple Double Kick Concave Standard and Tricks Skateboards for Kids and Beginners', 'Sports', 49, 2, '4.6005117', '101.0757833', 'Perak', 'Ipoh', '2023-07-05'),
+(3, 1, 'Sofa', 'Elevate your living space with our stylish Brown Sofa, designed for comfort and sophistication. Its rich brown upholstery complements any decor, adding a touch of elegance to your home.', 'Furniture', 350, 2, '4.6005117', '101.0757833', 'Perak', 'Ipoh', '2023-07-05'),
+(4, 1, 'Face Mask', 'NEUTROVIS Exclusive Bundle Pack 3 in 1 features our 3-ply Medical Face Mask in Sky Blue & Arctic Lime (10 pcs each) + FREE 4-ply Premium Medical Face Mask in Denim Blue (5 pcs).', 'Health', 9.9, 5, '4.6005117', '101.0757833', 'Perak', 'Ipoh', '2023-07-05'),
+(5, 1, 'Monopoly Game', 'Monopoly Game, Family Board Games for 2 to 6 Players & Kids Ages 8 and Up', 'Toys or Hobbies', 15.8, 2, '4.6005117', '101.0757833', 'Perak', 'Ipoh', '2023-07-05'),
+(6, 1, 'Kettle', 'Philips HD9350 Daily Collection Electric Kettle. Durable kettle in safe, food-grade stainless steel for long and reliable daily use. ', 'Electronics', 159, 6, '4.6005117', '101.0757833', 'Perak', 'Ipoh', '2023-07-05'),
+(7, 1, 'PingPong Racket', 'Professional Racket - Table Tennis Racket - ITTF Approved Rubber for Tournament Play - Best Table Tennis Paddle', 'Sports', 69.8, 2, '4.6005117', '101.0757833', 'Perak', 'Ipoh', '2023-07-05'),
+(8, 1, 'UNO Game', 'Classic Colour & Number Matching Card Game - 112 Cards - Customizable & Erasable Wild - Special Action Cards Included', 'Toys or Hobbies', 35, 1, '4.6005117', '101.0757833', 'Perak', 'Ipoh', '2023-07-05');
 
 -- --------------------------------------------------------
 
@@ -95,7 +102,7 @@ ALTER TABLE `tbl_users`
 -- AUTO_INCREMENT for table `tbl_items`
 --
 ALTER TABLE `tbl_items`
-  MODIFY `item_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `item_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
