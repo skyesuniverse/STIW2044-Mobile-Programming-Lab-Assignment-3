@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:barterit_appv2/models/item.dart';
+import 'package:barterit_appv3/models/item.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';

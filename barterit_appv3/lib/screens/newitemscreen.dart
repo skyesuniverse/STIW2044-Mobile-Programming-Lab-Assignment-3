@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-import 'package:barterit_appv2/models/user.dart';
-import 'package:barterit_appv2/myconfig.dart';
+import 'package:barterit_appv3/models/user.dart';
+import 'package:barterit_appv3/myconfig.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';

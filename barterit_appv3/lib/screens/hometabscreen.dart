@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:barterit_appv2/myconfig.dart';
-import 'package:barterit_appv2/screens/itemdetailsscreen.dart';
+import 'package:barterit_appv3/myconfig.dart';
+import 'package:barterit_appv3/screens/itemdetailsscreen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

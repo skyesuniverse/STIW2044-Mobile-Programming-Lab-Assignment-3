@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'models/user.dart';
-import 'package:barterit_appv2/myconfig.dart';
-import 'package:barterit_appv2/screens/mainscreen.dart';
+import 'package:barterit_appv3/myconfig.dart';
+import 'package:barterit_appv3/screens/mainscreen.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';

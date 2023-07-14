@@ -1,8 +1,8 @@
-import 'package:barterit_appv2/models/user.dart';
-import 'package:barterit_appv2/screens/hometabscreen.dart';
-import 'package:barterit_appv2/screens/profilescreen.dart';
-import 'package:barterit_appv2/screens/profiletabscreen.dart';
-import 'package:barterit_appv2/screens/sellertabscreen.dart';
+import 'package:barterit_appv3/models/user.dart';
+import 'package:barterit_appv3/screens/hometabscreen.dart';
+import 'package:barterit_appv3/screens/profilescreen.dart';
+import 'package:barterit_appv3/screens/profiletabscreen.dart';
+import 'package:barterit_appv3/screens/sellertabscreen.dart';
 
 import 'package:flutter/material.dart';
 
